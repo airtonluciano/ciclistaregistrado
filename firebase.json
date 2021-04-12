@@ -1,0 +1,11 @@
+﻿{
+  "hosting": {
+    "site": "ciclistaregistrado",
+    "public": "public",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+  }
+}
