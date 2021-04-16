@@ -2,11 +2,19 @@
   "name": "functions",
   "description": "Cloud Functions for Firebase",
   "scripts": {
-    "serve": "firebase emulators:start --only functions",
+    "serve-original": "firebase emulators:start --only functions",
     "shell": "firebase functions:shell",
     "start": "npm run shell",
     "deploy": "firebase deploy --only functions",
-    "logs": "firebase functions:log"
+    "logs": "firebase functions:log",
+
+    "serve": "npm run build && firebase emulators:start --only functions,firestore --import=./firestore_export",
+    "db:update-local-from-remote": "npm run db:backup-remote && gsutil -m cp -r gs://pedalbrasilia-df.appspot.com/firestore_export .",
+    "db:update-remote-from-local": "npm run db:backup-local && npm run db:backup-remote && gsutil -m cp -r ./firestore_export gs://pedalbrasilia-df.appspot.com && npm run run db:import-remote",
+    "db:import-remote": "gcloud firestore import gs://pedalbrasilia-df.appspot.com/firestore_export",
+    "db:backup-local": "firebase emulators:export --force .",
+    "db:rename-remote-backup-folder": "gsutil mv gs://pedalbrasilia-df.appspot.com/firestore_export gs://pedalbrasilia-df.appspot.com/firestore_export_$(date +%d-%m-%Y-%H-%M)",
+    "db:backup-remote": "npm run db:rename-remote-backup-folder && gcloud firestore export gs://pedalbrasilia-df.appspot.com/firestore_export"
   },
   "engines": {
     "node": "14"

@@ -1,0 +1,2 @@
+firebase emulators:start -P "pbsb" --import=./firestore_export --export-on-exit --only="firestore","functions","hosting"
+

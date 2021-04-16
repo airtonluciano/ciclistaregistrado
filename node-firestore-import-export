@@ -1,0 +1,8 @@
+ "scripts": {
+    "db:export": "firestore-export -a ./serviceAccountKey.json -b ./data/firestore.json",
+    "db:import": "firestore-import -a ./serviceAccountKey.json -b ./data/firestore.json",
+    "db:emulator:export": "export FIRESTORE_EMULATOR_HOST=localhost:8080 && yarn db:export",
+    "db:emulator:import": "export FIRESTORE_EMULATOR_HOST=localhost:8080 && yarn db:import",
+    "db:backup": "cp ./data/firestore.json ./data/firestore-$(date +%d-%m-%Y-%H-%M).json",
+    "dev": "firebase emulators:start --import=./data --export-on-exit=./data",
+  },

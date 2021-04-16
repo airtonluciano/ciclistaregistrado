@@ -1,5 +1,6 @@
 {
   "projects": {
-    "default": "pedalbrasilia-df"
+    "default": "pedalbrasilia-df",
+    "pbsb": "pedalbrasilia-df"
   }
 }

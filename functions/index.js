@@ -12,16 +12,17 @@ app.set('view engine', 'hbs');
 
 
 // Desenvolvimento
-//var serviceAccount = require("./pedalbrasilia-df-firebase-adminsdk-89yby-fbde32a8b0.json");
-//admin.initializeApp({ credential: admin.credential.cert(serviceAccount) });
+var serviceAccount = require("./pedalbrasilia-df-firebase-adminsdk-89yby-fbde32a8b0.json");
+admin.initializeApp({ credential: admin.credential.cert(serviceAccount) });
 
 
 //Deploy para produção
-admin.initializeApp(functions.config().firebase);
+//admin.initializeApp(functions.config().firebase);
 
 async function getFirestore() {
     const firestore_con = await admin.firestore();
-    const writeResult = firestore_con.collection('form_data').doc('G39chunXU9cZni6ERQ61').get().then(doc => {
+
+    const writeResult = firestore_con.collection('users').doc('G39chunXU9cZni6ERQ61').get().then(doc => {
         if (!doc.exists) { console.log('No such document!'); }
         else { return doc.data(); }
     })
